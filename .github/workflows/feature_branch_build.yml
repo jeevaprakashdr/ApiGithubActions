@@ -1,7 +1,7 @@
 name: build feature branch
 
 on:
-  push:
+  pull_request:
     branches: [ "test" ]
 
 jobs:
