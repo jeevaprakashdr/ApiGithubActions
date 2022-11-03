@@ -1,16 +1,25 @@
-name: Pull Request Example
+name: .NET build feature branch
 
 on:
   pull_request:
     branches:
       - main
-      - test
   workflow_dispatch:
 
 jobs:
-  print-hello-world:
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Say hello
-        run: echo "Hello World"
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
