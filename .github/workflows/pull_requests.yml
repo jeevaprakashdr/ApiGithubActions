@@ -1,0 +1,16 @@
+name: Pull Request Example
+
+on:
+  pull_request:
+    branches:
+      - main
+      - test
+  workflow_dispatch:
+
+jobs:
+  print-hello-world:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Say hello
+        run: echo "Hello World"
