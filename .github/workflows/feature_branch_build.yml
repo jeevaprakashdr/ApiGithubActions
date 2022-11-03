@@ -1,0 +1,28 @@
+name: Build feature branch pull request
+on:
+  pull_request:
+    branches:
+      - 'feature/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout feature branch
+      uses: actions/checkout@v3
+    - name: Setup dot net core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore Dependencies
+      run: dotnet restore
+    - name: Build application
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+
+      
+
+
+
+  
